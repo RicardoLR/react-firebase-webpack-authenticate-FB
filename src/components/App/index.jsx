@@ -9,12 +9,24 @@ import Main from '../Main'
 
 
 class App extends Component {
+
+	constructor(){
+		super();
+
+		this.state = {
+			user: {
+				photoURL: 'http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg',
+				email: 'ricardo@gmail.com',
+				displayName: 'Ricardo Lopez'
+          	}
+		}
+	}
 	
 	render () {
 		return (
 			<div>				
 				<Header />
-				<Main />
+				<Main user={this.state.user} />
 			</div>
 		)
 	}
