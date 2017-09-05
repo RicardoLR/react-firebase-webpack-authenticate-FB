@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import 'normalize-css'   // OJO para que los estilos sean iguales en todos los navegadores
 
 import styles from './app.css'
 
