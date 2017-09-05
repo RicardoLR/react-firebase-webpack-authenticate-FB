@@ -1,0 +1,18 @@
+
+.root {
+  background-color: #2d84cc;
+  color: #fff;
+  padding: 1em;
+  margin: 0.5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  margin: 0;
+  color: #fff;
+  font-size: 14pt;
+}
+
