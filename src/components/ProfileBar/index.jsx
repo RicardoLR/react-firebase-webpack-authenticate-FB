@@ -26,6 +26,12 @@ class ProfileBar extends Component {
         <button className={styles.button} onClick={this.props.onOpenText} >
           <span className="fa fa-lg fa-edit"> </span> Tweet!
         </button>
+
+
+        <button className={styles.button} onClick={this.props._onLogout} >
+          <span className="fa fa-lg fa-sing-out"> </span> Cerrar Sesion
+        </button>
+
       </div>
     )
   }

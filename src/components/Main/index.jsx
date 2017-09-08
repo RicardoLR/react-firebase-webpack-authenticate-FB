@@ -8,8 +8,9 @@ import ProfileBar from '../ProfileBar'
 
 
 const myPropTypes = {
-  user: PropTypes.object.isRequired
-
+  user: PropTypes.object.isRequired,
+  
+  _onLogout: PropTypes.func.isRequired
 }
 
 class Main extends Component {
@@ -211,6 +212,8 @@ class Main extends Component {
 					picture={this.props.user.photoURL}
 					username={this.props.user.email.split('@')[0]}  // dividir en 2 array entre en @, tomammos lo primero
 					onOpenText={this._handleOpenText}
+
+					_onLogout={this.props._onLogout}
 				/>
 
 				{this._renderOpenText()}
