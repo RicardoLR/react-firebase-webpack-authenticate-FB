@@ -1,5 +1,14 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import styles from './input-text.css'
+
+
+
+const myPropTypes = {
+  userNameToReply: PropTypes.string.isRequired,
+
+  _onSendText: PropTypes.func.isRequired,
+  _onCloseText: PropTypes.func.isRequired
+}
 
 
 /** Modificara padre en metodo _onSendText */
@@ -28,5 +37,7 @@ class InputText extends Component {
   }
 
 }
+
+InputText.propTypes = myPropTypes;
 
 export default InputText

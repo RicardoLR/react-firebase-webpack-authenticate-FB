@@ -5,6 +5,15 @@ import styles from './message-list.css'
 import Message from '../Message'
 
 
+const propTypes = {
+  messages: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+  _onRetweet: PropTypes.func.isRequired,
+  _onFavorite: PropTypes.func.isRequired,
+  _onReplyTweet: PropTypes.func.isRequired
+}
+
+
 /** Componente hijo de Main */
 class MessageList extends Component {
 
@@ -42,5 +51,7 @@ class MessageList extends Component {
     )
   }
 }
+
+MessageList.propTypes = propTypes;
 
 export default MessageList

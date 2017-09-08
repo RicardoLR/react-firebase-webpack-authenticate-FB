@@ -18,6 +18,7 @@ import styles from './app.css'
 
 import Header from '../Header'
 import Profile from '../Profile'
+import Login from '../Login'
 import Main from '../Main'
 
 
@@ -34,16 +35,38 @@ class App extends Component {
 				location: 'Reyes de leon'
 			}
 		}
+
+		this._handleOnAuth = this._handleOnAuth.bind(this);
+		this._handleOnAuthFB = this._handleOnAuthFB.bind(this);
 	}
 
+
+	_handleOnAuth(){
+
+	}
+
+
+	_handleOnAuthFB(){
+
+	}
 	
 
 	render () {
 
 
 
-	let Home = () => {
-		return ( <Main user={this.state.user} /> )
+	let RouteAPP = () => {
+		
+		if( this.state.user)
+			return( <Main user={this.state.user} /> )
+		
+		else
+			return( 
+				<Login 
+					onAuth={this._handleOnAuth}
+					onAuthFB={this._handleOnAuthFB} 
+				/>
+			)
 	}
 	
 
@@ -64,7 +87,9 @@ class App extends Component {
 
 	  <Router>
 	    <div>
-	      <Route exact path="/" component={Home}/>
+				<Header />
+
+	      <Route exact path="/" component={RouteAPP}/>
 
         <Route path='/profile' component={() => {
           return (

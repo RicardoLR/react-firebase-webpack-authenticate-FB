@@ -5,6 +5,13 @@ import MessageList from '../MessageList'
 import InputText from '../InputText'
 import ProfileBar from '../ProfileBar'
 
+
+
+const myPropTypes = {
+  user: PropTypes.object.isRequired
+
+}
+
 class Main extends Component {
 
 	constructor(props){
@@ -22,6 +29,36 @@ class Main extends Component {
 					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
 					displayName: "Ricardo Lopez",
 					username: "Richi",
+					date: Date.now() - 180000,
+					retweets: 0,
+					favorites:0
+				},
+				{
+					id: uuid.v4(),
+					text: "mensaje privado", 
+					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
+					displayName: "Alex Rocha",
+					username: "Alex",
+					date: Date.now() - 180000,
+					retweets: 0,
+					favorites:0
+				},
+				{
+					id: uuid.v4(),
+					text: "mensaje privado", 
+					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
+					displayName: "Alex Rocha",
+					username: "Alex",
+					date: Date.now() - 180000,
+					retweets: 0,
+					favorites:0
+				},
+				{
+					id: uuid.v4(),
+					text: "mensaje privado", 
+					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
+					displayName: "Alex Rocha",
+					username: "Alex",
 					date: Date.now() - 180000,
 					retweets: 0,
 					favorites:0
@@ -193,5 +230,6 @@ class Main extends Component {
 
 }
 
+Main.propTypes = myPropTypes;
 
 export default Main

@@ -1,10 +1,35 @@
+
 .root {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin: 0.5em;
+  margin: 10px;
   padding: 1em;
+  
 }
+
+@media (min-width: 750px) {
+  .root{
+    width: 42%;
+    align-items: center;
+
+  }
+  
+}
+@media (min-width: 900px) {
+  .root{
+    width: 45%;
+    align-items: center;
+
+  } 
+}
+@media (max-width: 750px) {
+  .root{
+    width: 100%;
+  }
+  
+}
+
 
 .text {
   font-size: 16pt;
