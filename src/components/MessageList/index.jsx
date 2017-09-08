@@ -26,6 +26,13 @@ class MessageList extends Component {
               displayName={msg.displayName}
               username={msg.username}
               date={msg.date}
+
+              numRetweets = { msg.retweets }
+              numFavorites = { msg.favorites }
+
+              _onRetweet = { () => this.props._onRetweet(msg.id) }
+              _onFavorite = { () => this.props._onFavorite(msg.id) }
+              _onReplyTweet = { ()=>this.props._onReplyTweet(msg.id, msg.username) }
             />
 
           )
