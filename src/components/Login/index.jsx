@@ -23,7 +23,7 @@ function Login ({ onAuth, onAuthFB }) {
       </button>
 
       <button className={styles.button} onClick={onAuthFB} >
-        <span className='fa fa-github '></span> Login con FB
+        <span className='fa fa-fb '></span> Login con FB
       </button>
 
     </div>

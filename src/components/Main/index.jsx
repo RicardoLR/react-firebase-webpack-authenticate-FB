@@ -1,10 +1,12 @@
+
 import React, { Component, PropTypes } from 'react'
 import uuid from 'uuid'
+
+import firebase from 'firebase'
 
 import MessageList from '../MessageList'
 import InputText from '../InputText'
 import ProfileBar from '../ProfileBar'
-
 
 
 const myPropTypes = {
@@ -23,58 +25,7 @@ class Main extends Component {
 
 			usernameToReply: '',
 			openText: false,
-			messages: [
-				{
-					id: uuid.v4(),
-					text: "mensaje publico", 
-					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
-					displayName: "Ricardo Lopez",
-					username: "Richi",
-					date: Date.now() - 180000,
-					retweets: 0,
-					favorites:0
-				},
-				{
-					id: uuid.v4(),
-					text: "mensaje privado", 
-					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
-					displayName: "Alex Rocha",
-					username: "Alex",
-					date: Date.now() - 180000,
-					retweets: 0,
-					favorites:0
-				},
-				{
-					id: uuid.v4(),
-					text: "mensaje privado", 
-					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
-					displayName: "Alex Rocha",
-					username: "Alex",
-					date: Date.now() - 180000,
-					retweets: 0,
-					favorites:0
-				},
-				{
-					id: uuid.v4(),
-					text: "mensaje privado", 
-					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
-					displayName: "Alex Rocha",
-					username: "Alex",
-					date: Date.now() - 180000,
-					retweets: 0,
-					favorites:0
-				},
-				{
-					id: uuid.v4(),
-					text: "mensaje privado", 
-					picture: "http://www.infoanimales.com/wp-content/uploads/2014/05/leon-3-550x413.jpeg",
-					displayName: "Alex Rocha",
-					username: "Alex",
-					date: Date.now() - 180000,
-					retweets: 0,
-					favorites:0
-				}
-			]
+			messages: []
 		}
 
 
@@ -92,15 +43,57 @@ class Main extends Component {
 	}
 
 
+	componentWillMount(){
+			
+		/** Manejo de eventos firebase con si DB  */
+		const messageRef = firebase.database().ref().child( 'messages' )
+
+		/** Como socket, escucha eventos como agragar nuevo mensaje con _handleSendText */
+		messageRef.on('child_added', snapshot => { 
+			this.setState({ 
+				messages: this.state.messages.concat( snapshot.val() ),
+				openText: false
+			 })
+		})
+	}
+
+
 	/** mis funciones de componente */
 	_handleOpenText(event){
 		event.preventDefault(); // evitar compoertamiento por defecto en navegador
 		
 		this.setState({ openText: true })
 	}
-	
-	/** Si openText = true, regresa componente para ser mostrado  
 
+	_handleSendText(event){
+		event.preventDefault(); // evitar compoertamiento por defecto en navegador
+
+		/** mi event.target es todo el componente "InputText" su form...  */
+		let newMessage = {
+			id: uuid.v4(),
+
+			text: event.target.text.value,
+
+			picture: this.props.user.photoURL,
+			displayName: this.props.user.displayName,
+			username: this.props.user.email.split('@')[0],
+			date: Date.now(),
+			retweets: 0,
+			favorites:0
+		}
+
+		console.log("newMessage", newMessage);
+		
+		
+		/** Manejo de Servicio con firebase, .set() : de firebase */
+		const messageRef = firebase.database().ref().child('messages')
+		const messageId = messageRef.push()
+		messageId.set(newMessage) 
+
+	}
+	
+	/** 
+	 * Si openText = true, regresa componente para ser mostrado  
 	@return InputText: Component */
 	_renderOpenText(){
 		if( this.state.openText )	
@@ -114,29 +107,6 @@ class Main extends Component {
 			)
 	}
 
-
-	_handleSendText(event){
-		event.preventDefault(); // evitar compoertamiento por defecto en navegador
-
-		/** mi event.target es todo el componente "InputText" su form...  */
-		let newMessage = {
-			id: uuid.v4(),
-			username: this.props.user.email.split('@')[0],
-			displayName: this.props.user.displayName,
-			picture: this.props.user.photoURL,
-			date: Date.now(),
-
-			text: event.target.text.value
-		}
-
-		console.log("newMessage", newMessage);
-
-		this.setState({
-			messages: this.state.messages.concat([newMessage]),
-			openText: false
-		})
-	}
-	
 	_handleOnCloseText(){
 		event.preventDefault(); // evitar compoertamiento por defecto en navegador
 		this.setState({ openText: false })
@@ -190,9 +160,12 @@ class Main extends Component {
 	}
 
 	_handleReplyTweet( msgId, usernameToReply ){
+		
+		console.log("_handleReplyTweet", usernameToReply );
+
 		this.setState({
 			openText : true,
-			usernameToReply
+			usernameToReply : usernameToReply
 		})
 	}
 

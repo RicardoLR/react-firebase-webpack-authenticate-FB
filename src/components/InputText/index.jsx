@@ -4,7 +4,7 @@ import styles from './input-text.css'
 
 
 const myPropTypes = {
-  userNameToReply: PropTypes.string.isRequired,
+  usernameToReply: PropTypes.string.isRequired,
 
   _onSendText: PropTypes.func.isRequired,
   _onCloseText: PropTypes.func.isRequired
@@ -20,8 +20,8 @@ class InputText extends Component {
     return(
       <form className={styles.form} onSubmit={this.props._onSendText} > 
 
-        <textarea className={styles.text} name='text'>
-          {(this.props.usernameToReply) ? `@${this.props.usernameToReply} `  : ''}
+        <textarea className={styles.text} name='text' rows="22" ref="summaryContent" > 
+          {(this.props.usernameToReply) ? `@${this.props.usernameToReply}`  : ''}
         </textarea>
 
         <div className={styles.buttons} >
